@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: my-nginx
+spec:
+  containers:
+    - name: my-nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - name: custom-page
+          mountPath: /usr/share/nginx/html/index.html
+          subPath: index.html
+  volumes:
+    - name: custom-page
+      configMap:
+        name: nginx-custom-page
